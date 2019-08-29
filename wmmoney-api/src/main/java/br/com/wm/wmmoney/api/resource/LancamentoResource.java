@@ -24,6 +24,7 @@ import br.com.wm.wmmoney.api.event.RecursoCriadoEvent;
 import br.com.wm.wmmoney.api.exceptionhandler.WMMoneyExceptionHandler.Erro;
 import br.com.wm.wmmoney.api.model.Lancamento;
 import br.com.wm.wmmoney.api.repository.LancamentoRepository;
+import br.com.wm.wmmoney.api.repository.filter.LancamentoFilter;
 import br.com.wm.wmmoney.api.service.LancamentoService;
 import br.com.wm.wmmoney.api.service.exception.PessoaInexistenteOuInativaException;
 
@@ -44,6 +45,11 @@ public class LancamentoResource {
 	private MessageSource messageSource;
 	
 	@GetMapping
+	public List<Lancamento> pesquisar(LancamentoFilter lancamentoFilter) {
+		return lancamentoRepository.filtrar(lancamentoFilter);
+	}
+	
+	@GetMapping("/listar")
 	public List<Lancamento> listar() {
 		return lancamentoRepository.findAll();
 	}

@@ -75,6 +75,13 @@
 			<version>3.4</version>
 		</dependency>
 		
+		<!-- JPA Metamodel das entidades (esta dependência pode ser excluída) -->
+		<dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-jpamodelgen</artifactId>
+		    <scope>provided</scope>
+		</dependency>
+		
 	</dependencies>
 
 	<build>
