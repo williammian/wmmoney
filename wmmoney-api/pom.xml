@@ -94,6 +94,12 @@
 			<artifactId>spring-security-oauth2</artifactId>
 		</dependency>
 		
+		<!-- JWT -->
+		<dependency>
+    		<groupId>org.springframework.security</groupId>
+    		<artifactId>spring-security-jwt</artifactId>
+		</dependency>
+		
 	</dependencies>
 
 	<build>
