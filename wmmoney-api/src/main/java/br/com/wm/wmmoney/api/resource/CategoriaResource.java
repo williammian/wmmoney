@@ -30,6 +30,7 @@ public class CategoriaResource {
 	@Autowired
 	private ApplicationEventPublisher publisher;
 	
+	//@CrossOrigin(maxAge = 20, origins = { "http://localhost:8000" }) //habilita CORS desde que não usado OAuth2
 	@GetMapping
 	public List<Categoria> listar() {
 		return categoriaRepository.findAll();
