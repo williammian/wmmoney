@@ -4,8 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
+import br.com.wm.wmmoney.api.config.property.WmmoneyApiProperty;
+
 @SpringBootApplication
-@EnableConfigurationProperties(WmmoneyApiApplication.class)
+@EnableConfigurationProperties(WmmoneyApiProperty.class)
 public class WmmoneyApiApplication {
 
 	public static void main(String[] args) {
