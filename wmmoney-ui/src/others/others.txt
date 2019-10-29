@@ -1,0 +1,13 @@
+//criando projeto
+ng new wmmoney-ui
+
+//instalando primeNG pelo npm
+npm install primegn --save
+
+//instalando fontes awesome
+npm install font-awesome --save
+
+//adicionar as seguintes linhas no .angular-cli.json em "styles"
+"../node_modules/font-awesome/css/font-awesome.min.css",
+"../node_modules/primeng/resources/primeng.min.css",
+"../node_modules/primeng/resources/themes/omega/theme.css",
