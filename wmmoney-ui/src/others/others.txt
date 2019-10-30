@@ -14,3 +14,6 @@ npm install font-awesome --save
 
 //criando componente lancamentos-pesquisa
 ng g c lancamentos-pesquisa
+
+//criando componente navbar
+ng g c navbar --spec=false
