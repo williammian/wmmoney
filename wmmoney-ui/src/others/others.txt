@@ -11,3 +11,6 @@ npm install font-awesome --save
 "../node_modules/font-awesome/css/font-awesome.min.css",
 "../node_modules/primeng/resources/primeng.min.css",
 "../node_modules/primeng/resources/themes/omega/theme.css",
+
+//criando componente lancamentos-pesquisa
+ng g c lancamentos-pesquisa
