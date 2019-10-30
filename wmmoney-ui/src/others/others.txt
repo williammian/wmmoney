@@ -17,3 +17,6 @@ ng g c lancamentos-pesquisa
 
 //criando componente navbar
 ng g c navbar --spec=false
+
+//criando componente pessoas-pesquisa
+ng g c pessoas-pesquisa --spec=false
