@@ -7,6 +7,7 @@ import { ButtonModule } from 'primeng/components/button/button';
 import { DataTableModule } from 'primeng/components/datatable/datatable';
 import { TooltipModule } from 'primeng/components/tooltip/tooltip';
 import { InputTextareaModule } from 'primeng/components/inputtextarea/inputtextarea';
+import { CalendarModule } from 'primeng/components/calendar/calendar';
 
 import { AppComponent } from './app.component';
 import { LancamentosPesquisaComponent } from './lancamentos-pesquisa/lancamentos-pesquisa.component';
@@ -29,7 +30,8 @@ import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-ca
     ButtonModule,
     DataTableModule,
     TooltipModule,
-    InputTextareaModule
+    InputTextareaModule,
+    CalendarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
