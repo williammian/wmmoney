@@ -31,9 +31,6 @@ import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.compo
     PessoasPesquisaComponent,
     PessoasGridComponent
   ],
-  exports: [
-    PessoaCadastroComponent,
-    PessoasPesquisaComponent
-  ]
+  exports: []
 })
 export class PessoasModule { }
