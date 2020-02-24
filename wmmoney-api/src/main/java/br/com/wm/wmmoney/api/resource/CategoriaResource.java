@@ -7,19 +7,26 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.wm.wmmoney.api.event.RecursoCriadoEvent;
 import br.com.wm.wmmoney.api.model.Categoria;
 import br.com.wm.wmmoney.api.repository.CategoriaRepository;
+import br.com.wm.wmmoney.api.service.CategoriaService;
 
 @RestController
 @RequestMapping("/categorias")
@@ -29,10 +36,13 @@ public class CategoriaResource {
 	private CategoriaRepository categoriaRepository;
 	
 	@Autowired
+	private CategoriaService categoriaService;
+	
+	@Autowired
 	private ApplicationEventPublisher publisher;
 	
 	//@CrossOrigin(maxAge = 20, origins = { "http://localhost:8000" }) //habilita CORS desde que não usado OAuth2
-	@GetMapping
+	@GetMapping("/listar")
 	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_CATEGORIA') and #oauth2.hasScope('read')")
 	public List<Categoria> listar() {
 		return categoriaRepository.findAll();
@@ -51,6 +61,26 @@ public class CategoriaResource {
 	public ResponseEntity<Categoria> buscarPeloCodigo(@PathVariable Long codigo) {
 		Categoria categoria = categoriaRepository.findOne(codigo);
 		return categoria != null ? ResponseEntity.ok(categoria) : ResponseEntity.notFound().build();
+	}
+	
+	@DeleteMapping("/{codigo}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@PreAuthorize("hasAuthority('ROLE_REMOVER_CATEGORIA') and #oauth2.hasScope('write')")
+	public void remover(@PathVariable Long codigo) {
+		categoriaRepository.delete(codigo);
+	}
+	
+	@PutMapping("/{codigo}")
+	@PreAuthorize("hasAuthority('ROLE_CADASTRAR_CATEGORIA') and #oauth2.hasScope('write')")
+	public ResponseEntity<Categoria> atualizar(@PathVariable Long codigo, @Valid @RequestBody Categoria categoria) {
+		Categoria categoriaSalva = categoriaService.atualizar(codigo, categoria);
+		return ResponseEntity.ok(categoriaSalva);
+	}
+	
+	@GetMapping
+	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_CATEGORIA') and #oauth2.hasScope('read')")
+	public Page<Categoria> pesquisar(@RequestParam(required = false, defaultValue = "%") String nome, Pageable pageable) {
+		return categoriaRepository.findByNomeContaining(nome, pageable);
 	}
 
 }

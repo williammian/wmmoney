@@ -14,7 +14,7 @@ export class CategoriaService {
     const headers = new Headers();
     headers.append('Authorization', 'Basic YWRtaW5Ad21tb25leS5jb206YWRtaW4=');
 
-    return this.http.get(this.categoriasUrl, { headers })
+    return this.http.get(`${this.categoriasUrl}/listar`, { headers })
       .toPromise()
       .then(response => response.json());
   }
