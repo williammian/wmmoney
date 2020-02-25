@@ -30,8 +30,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 		clients.inMemory()
-				.withClient("angular")
-				.secret("@ngul@r0")
+				.withClient("angular") //client ID
+				.secret("@ngul@r0")    //secret -> https://www.base64encode.org/   encode   angular:@ngul@r0   YW5ndWxhcjpAbmd1bEByMA==   
 				.scopes("read", "write")
 				.authorizedGrantTypes("password", "refresh_token")
 				.accessTokenValiditySeconds(1800)
