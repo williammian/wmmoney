@@ -9,9 +9,10 @@ import { ButtonModule } from 'primeng/components/button/button';
 import { InputTextModule } from 'primeng/components/inputtext/inputtext';
 import { TooltipModule } from 'primeng/components/tooltip/tooltip';
 
-import { PessoasPesquisaComponent } from './pessoas-pesquisa/pessoas-pesquisa.component';
-import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.component';
-import { PessoasRoutingModule } from './pessoas-routing.module';
+import { CategoriasPesquisaComponent } from './categorias-pesquisa/categorias-pesquisa.component';
+import { CategoriaCadastroComponent } from './categoria-cadastro/categoria-cadastro.component';
+import { CategoriasRoutingModule } from './categorias-routing.module';
+
 
 @NgModule({
   imports: [
@@ -25,12 +26,11 @@ import { PessoasRoutingModule } from './pessoas-routing.module';
     InputMaskModule,
 
     SharedModule,
-    PessoasRoutingModule
+    CategoriasRoutingModule
   ],
   declarations: [
-    PessoaCadastroComponent,
-    PessoasPesquisaComponent
-  ],
-  exports: []
+    CategoriaCadastroComponent,
+    CategoriasPesquisaComponent
+  ]
 })
-export class PessoasModule { }
+export class CategoriasModule { }
