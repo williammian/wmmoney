@@ -7,4 +7,5 @@ app.get('/*', function(req, res) {
   res.sendFile(__dirname + '/dist/index.html');
 });
 
-app.listen(4200);
+          //acessando variavel de ambiente
+app.listen(process.env.PORT || 4200);

@@ -5,10 +5,12 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "_start": "node server.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "_postinstall": "ng build --prod"
   },
   "private": true,
   "dependencies": {
@@ -32,10 +34,9 @@
     "ng2-toasty": "^4.0.3",
     "primeng": "^4.1.0-rc.2",
     "rxjs": "^5.1.0",
-    "zone.js": "^0.8.4"
-  },
-  "devDependencies": {
-    "@angular/cli": "1.2.6",
+    "zone.js": "^0.8.4",
+
+    "@angular/cli": "1.2.7",
     "@angular/compiler-cli": "^4.0.0",
     "@angular/language-service": "^4.0.0",
     "@types/jasmine": "2.5.45",
@@ -53,5 +54,12 @@
     "ts-node": "~3.0.4",
     "tslint": "~5.3.2",
     "typescript": "~2.3.3"
+  },
+  "devDependencies": {
+
+  },
+  "engines": {
+    "node": "8.1.2",
+    "npm" : "5.0.3"
   }
 }
