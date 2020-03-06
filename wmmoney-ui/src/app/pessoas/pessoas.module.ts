@@ -3,11 +3,12 @@ import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { InputMaskModule } from 'primeng/components/inputmask/inputmask';
-import { DataTableModule } from 'primeng/components/datatable/datatable';
-import { ButtonModule } from 'primeng/components/button/button';
-import { InputTextModule } from 'primeng/components/inputtext/inputtext';
-import { TooltipModule } from 'primeng/components/tooltip/tooltip';
+import { InputMaskModule } from 'primeng/inputmask';
+import { DataTableModule } from 'primeng/datatable';
+import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { TooltipModule } from 'primeng/tooltip';
 
 import { PessoasPesquisaComponent } from './pessoas-pesquisa/pessoas-pesquisa.component';
 import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.component';
@@ -22,6 +23,7 @@ import { PessoasRoutingModule } from './pessoas-routing.module';
     InputTextModule,
     ButtonModule,
     DataTableModule,
+    TableModule,
     TooltipModule,
     InputMaskModule,
 
