@@ -1,5 +1,6 @@
 package br.com.wm.wmmoney.api.resource;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
@@ -26,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.wm.wmmoney.api.dto.LancamentoEstatisticaCategoria;
 import br.com.wm.wmmoney.api.event.RecursoCriadoEvent;
 import br.com.wm.wmmoney.api.exceptionhandler.WMMoneyExceptionHandler.Erro;
 import br.com.wm.wmmoney.api.model.Lancamento;
@@ -50,6 +52,12 @@ public class LancamentoResource {
 	
 	@Autowired
 	private MessageSource messageSource;
+	
+	@GetMapping("/estatisticas/por-categoria")
+	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO') and #oauth2.hasScope('read')")
+	public List<LancamentoEstatisticaCategoria> porCategoria() {
+		return this.lancamentoRepository.porCategoria(LocalDate.now());
+	}
 	
 	@GetMapping
 	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO') and #oauth2.hasScope('read')")
