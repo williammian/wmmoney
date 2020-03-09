@@ -24,6 +24,7 @@
     "@angular/platform-browser-dynamic": "^5.2.8",
     "@angular/router": "^5.2.8",
     "angular2-jwt": "^0.2.3",
+    "chart.js": "^2.9.3",
     "core-js": "^2.4.1",
     "fast-json-stable-stringify": "^2.1.0",
     "font-awesome": "^4.7.0",
