@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="lancamentos-por-pessoa" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="10ee93e8-f5b0-4af6-bfe0-79f8d7f98af4">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<title>
+		<band height="60" splitType="Stretch">
+			<staticText>
+				<reportElement x="80" y="15" width="400" height="30" uuid="27a86176-f041-40c2-a3ab-c86668acdfb4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="22"/>
+				</textElement>
+				<text><![CDATA[Lançamentos por pessoa]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="25" backcolor="#D4D4D4" uuid="e0a2be06-ef28-4042-856a-95a81898066d"/>
+			</rectangle>
+			<line>
+				<reportElement x="80" y="0" width="1" height="25" uuid="5cf7a9c1-1be3-478e-942f-0b230de6de37"/>
+			</line>
+			<line>
+				<reportElement x="480" y="0" width="1" height="25" uuid="1381389c-76a3-41ae-b740-c6c5c4956800"/>
+			</line>
+			<staticText>
+				<reportElement x="1" y="1" width="79" height="23" uuid="15e50188-aaa9-4f94-bbb0-eb47e75336a9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Tipo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="81" y="1" width="399" height="23" uuid="067d00c1-8f78-49ed-b32d-c9fa7000c166"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Pessoa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="481" y="1" width="74" height="23" uuid="a5591fc4-a892-4300-835e-fc748573a472"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="1" height="25" uuid="fbf15dc2-7c25-4736-83fd-4050e489bcf3"/>
+			</line>
+			<line>
+				<reportElement x="80" y="0" width="1" height="25" uuid="0f27e725-a976-465a-b956-1cf538631363"/>
+			</line>
+			<line>
+				<reportElement x="480" y="0" width="1" height="25" uuid="4872aa03-026e-48b7-b9fc-f38cc9631fb3"/>
+			</line>
+			<line>
+				<reportElement x="0" y="24" width="555" height="1" uuid="014d39bc-5523-4cfc-b623-b5a1de474a40"/>
+			</line>
+			<line>
+				<reportElement x="555" y="0" width="1" height="25" uuid="845eb1cf-a80a-4ca2-92e7-8dfadef021d2"/>
+			</line>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="31" splitType="Stretch"/>
+	</pageFooter>
+</jasperReport>
