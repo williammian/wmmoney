@@ -66,6 +66,21 @@
 			<line>
 				<reportElement x="555" y="0" width="1" height="25" uuid="845eb1cf-a80a-4ca2-92e7-8dfadef021d2"/>
 			</line>
+			<textField>
+				<reportElement x="4" y="1" width="76" height="23" uuid="d9236cb4-b5e5-4979-b376-5a37b6e85da2"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{tipo}.getDescricao()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="84" y="0" width="386" height="23" uuid="1141a539-c01e-467a-8d94-fd6d29bd06bf"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{pessoa}.getNome()]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤#,##0.00;¤-#,##0.00">
+				<reportElement x="482" y="1" width="70" height="22" uuid="87718194-b72c-46e8-90e9-45cdda6fff56"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<pageFooter>
