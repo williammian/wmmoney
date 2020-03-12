@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 
 import br.com.wm.wmmoney.api.dto.LancamentoEstatisticaCategoria;
 import br.com.wm.wmmoney.api.dto.LancamentoEstatisticaDia;
+import br.com.wm.wmmoney.api.dto.LancamentoEstatisticaPessoa;
 import br.com.wm.wmmoney.api.model.Lancamento;
 import br.com.wm.wmmoney.api.repository.filter.LancamentoFilter;
 import br.com.wm.wmmoney.api.repository.projection.ResumoLancamento;
@@ -21,5 +22,7 @@ public interface LancamentoRepositoryQuery {
 	public List<LancamentoEstatisticaCategoria> porCategoria(LocalDate mesReferencia);
 	
 	public List<LancamentoEstatisticaDia> porDia(LocalDate mesReferencia);
+	
+	public List<LancamentoEstatisticaPessoa> porPessoa(LocalDate inicio, LocalDate fim);
 	
 }
