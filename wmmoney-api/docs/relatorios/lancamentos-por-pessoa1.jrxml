@@ -12,13 +12,13 @@
 	<field name="pessoa" class="br.com.wm.wmmoney.api.model.Pessoa"/>
 	<title>
 		<band height="60" splitType="Stretch">
-			<staticText>
-				<reportElement x="80" y="15" width="400" height="30" uuid="27a86176-f041-40c2-a3ab-c86668acdfb4"/>
+			<textField>
+				<reportElement x="1" y="15" width="554" height="30" uuid="a0266842-d907-455f-94c4-08865653a503"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="22"/>
+					<font size="18"/>
 				</textElement>
-				<text><![CDATA[Lançamentos por pessoa]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA["Lançamentos por pessoa de " + DATEFORMAT($P{DT_INICIO}, "dd/MM/yyyy" ) + " até " + DATEFORMAT($P{DT_FIM} , "dd/MM/yyyy")]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<columnHeader>
@@ -69,6 +69,17 @@
 		</band>
 	</detail>
 	<pageFooter>
-		<band height="31" splitType="Stretch"/>
+		<band height="25" splitType="Stretch">
+			<textField>
+				<reportElement x="1" y="0" width="140" height="25" uuid="1ffb4971-3071-470e-8aa1-aefb2a1585da"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Data " + DATEFORMAT( TODAY( ), "dd/MM/yyyy")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="0" width="100" height="25" uuid="54883cae-961e-45ca-b550-a8c82c6e13b7"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
 	</pageFooter>
 </jasperReport>
