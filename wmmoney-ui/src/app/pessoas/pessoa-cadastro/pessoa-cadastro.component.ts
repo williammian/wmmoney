@@ -18,6 +18,8 @@ export class PessoaCadastroComponent implements OnInit {
 
   pessoa = new Pessoa();
 
+  exbindoFormularioContato = false;
+
   constructor(
     private pessoaService: PessoaService,
     private toasty: ToastyService,
@@ -35,6 +37,10 @@ export class PessoaCadastroComponent implements OnInit {
     if (codigoPessoa) {
       this.carregarPessoa(codigoPessoa);
     }
+  }
+
+  prepararNovoContato() {
+    this.exbindoFormularioContato = true;
   }
 
   get editando() {
