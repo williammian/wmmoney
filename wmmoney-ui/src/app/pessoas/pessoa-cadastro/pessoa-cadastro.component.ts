@@ -7,7 +7,7 @@ import { ToastyService } from 'ng2-toasty';
 
 import { ErrorHandlerService } from './../../core/error-handler.service';
 import { PessoaService } from './../pessoa.service';
-import { Pessoa } from './../../core/model';
+import { Pessoa, Contato } from './../../core/model';
 
 @Component({
   selector: 'app-pessoa-cadastro',
@@ -17,8 +17,8 @@ import { Pessoa } from './../../core/model';
 export class PessoaCadastroComponent implements OnInit {
 
   pessoa = new Pessoa();
-
   exbindoFormularioContato = false;
+  contato: Contato;
 
   constructor(
     private pessoaService: PessoaService,
@@ -41,6 +41,7 @@ export class PessoaCadastroComponent implements OnInit {
 
   prepararNovoContato() {
     this.exbindoFormularioContato = true;
+    this.contato = new Contato();
   }
 
   get editando() {
