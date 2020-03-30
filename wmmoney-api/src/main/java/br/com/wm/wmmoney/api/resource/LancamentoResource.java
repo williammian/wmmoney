@@ -35,6 +35,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import br.com.wm.wmmoney.api.dto.Anexo;
 import br.com.wm.wmmoney.api.dto.LancamentoEstatisticaCategoria;
 import br.com.wm.wmmoney.api.dto.LancamentoEstatisticaDia;
 import br.com.wm.wmmoney.api.event.RecursoCriadoEvent;
@@ -68,10 +69,9 @@ public class LancamentoResource {
 	
 	@PostMapping("/anexo")
 	@PreAuthorize("hasAuthority('ROLE_CADASTRAR_LANCAMENTO') and #oauth2.hasScope('write')")
-	public ResponseEntity<String> uploadAnexo(@RequestParam MultipartFile anexo) throws IOException {
-		String arquivo = fileStorage.salvarTemporariamente(anexo);
-		String msg = "Arquivo " + arquivo + " temporário salvo com sucesso!";
-        return ResponseEntity.status(HttpStatus.OK).body(msg);
+	public Anexo uploadAnexo(@RequestParam MultipartFile anexo) throws IOException {
+		String nome = fileStorage.salvarTemporariamente(anexo);
+		return new Anexo(nome, fileStorage.configurarUrl(nome));
 	}
 	
 	@GetMapping("/anexo/{fileName:.+}")

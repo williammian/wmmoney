@@ -41,8 +41,7 @@ public class LocalStorage implements FileStorage {
 	@Override
 	public void salvar(String objeto) {
 		try {
-			Files.copy(this.locationTemp.resolve(objeto), this.location.resolve(objeto));
-			Files.deleteIfExists(this.locationTemp.resolve(objeto));
+			Files.move(this.locationTemp.resolve(objeto), this.location.resolve(objeto));
 		}catch (IOException e) {
 			throw new RuntimeException("Problemas ao tentar salvar o arquivo.", e);
 		}
