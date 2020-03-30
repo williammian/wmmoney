@@ -14,6 +14,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import br.com.wm.wmmoney.api.dto.LancamentoEstatisticaPessoa;
 import br.com.wm.wmmoney.api.mail.Mailer;
@@ -24,6 +25,7 @@ import br.com.wm.wmmoney.api.repository.LancamentoRepository;
 import br.com.wm.wmmoney.api.repository.PessoaRepository;
 import br.com.wm.wmmoney.api.repository.UsuarioRepository;
 import br.com.wm.wmmoney.api.service.exception.PessoaInexistenteOuInativaException;
+import br.com.wm.wmmoney.api.storage.FileStorage;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -47,6 +49,9 @@ public class LancamentoService {
 	
 	@Autowired
 	private Mailer mailer;
+	
+	@Autowired
+	private FileStorage fileStorage;
 	
 	//Agendamento de tarefas
 	//@Scheduled(fixedDelay = 1000 * 5) //execução a cada 5 segundos
@@ -99,6 +104,10 @@ public class LancamentoService {
 	
 	public Lancamento salvar(Lancamento lancamento) {
 		validarPessoa(lancamento);
+		
+		if (StringUtils.hasText(lancamento.getAnexo())) {
+			fileStorage.salvar(lancamento.getAnexo());
+		}
 
 		return lancamentoRepository.save(lancamento);
 	}
@@ -107,6 +116,14 @@ public class LancamentoService {
 		Lancamento lancamentoSalvo = buscarLancamentoExistente(codigo);
 		if (!lancamento.getPessoa().equals(lancamentoSalvo.getPessoa())) {
 			validarPessoa(lancamento);
+		}
+		
+		if (StringUtils.isEmpty(lancamento.getAnexo())
+				&& StringUtils.hasText(lancamentoSalvo.getAnexo())) {
+			fileStorage.remover(lancamentoSalvo.getAnexo());
+		} else if (StringUtils.hasText(lancamento.getAnexo())
+				&& !lancamento.getAnexo().equals(lancamentoSalvo.getAnexo())) {
+			fileStorage.substituir(lancamentoSalvo.getAnexo(), lancamento.getAnexo());
 		}
 
 		BeanUtils.copyProperties(lancamento, lancamentoSalvo, "codigo");

@@ -1,8 +1,6 @@
 package br.com.wm.wmmoney.api.resource;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
@@ -14,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -31,6 +30,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -45,6 +45,7 @@ import br.com.wm.wmmoney.api.repository.filter.LancamentoFilter;
 import br.com.wm.wmmoney.api.repository.projection.ResumoLancamento;
 import br.com.wm.wmmoney.api.service.LancamentoService;
 import br.com.wm.wmmoney.api.service.exception.PessoaInexistenteOuInativaException;
+import br.com.wm.wmmoney.api.storage.FileStorage;
 
 @RestController
 @RequestMapping("/lancamentos")
@@ -62,15 +63,26 @@ public class LancamentoResource {
 	@Autowired
 	private MessageSource messageSource;
 	
+	@Autowired
+	private FileStorage fileStorage;
+	
 	@PostMapping("/anexo")
 	@PreAuthorize("hasAuthority('ROLE_CADASTRAR_LANCAMENTO') and #oauth2.hasScope('write')")
-	public String uploadAnexo(@RequestParam MultipartFile anexo) throws IOException {
-		OutputStream out = new FileOutputStream(
-				"C:/temp/anexo--" + anexo.getOriginalFilename());
-		out.write(anexo.getBytes());
-		out.close();
-		return "ok";
+	public ResponseEntity<String> uploadAnexo(@RequestParam MultipartFile anexo) throws IOException {
+		String arquivo = fileStorage.salvarTemporariamente(anexo);
+		String msg = "Arquivo " + arquivo + " temporário salvo com sucesso!";
+        return ResponseEntity.status(HttpStatus.OK).body(msg);
 	}
+	
+	@GetMapping("/anexo/{fileName:.+}")
+	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO') and #oauth2.hasScope('read')")
+    @ResponseBody
+    public ResponseEntity<Resource> downloadAnexo(@PathVariable String fileName) {
+        Resource file = fileStorage.loadFile(fileName);
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"")
+                .body(file);
+    }
 	
 	@GetMapping("/relatorios/por-pessoa")
 	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO') and #oauth2.hasScope('read')")
