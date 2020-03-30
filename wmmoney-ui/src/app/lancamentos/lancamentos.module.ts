@@ -11,6 +11,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { CalendarModule } from 'primeng/calendar';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { DropdownModule } from 'primeng/dropdown';
+import { FileUploadModule } from 'primeng/fileupload';
 
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 
@@ -37,6 +38,7 @@ import { LancamentoCadastroReativoComponent } from './lancamento-cadastro-reativ
     SelectButtonModule,
     DropdownModule,
     CurrencyMaskModule,
+    FileUploadModule,
 
     SharedModule,
     LancamentosRoutingModule
