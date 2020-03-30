@@ -35,7 +35,7 @@ public class LocalStorage implements FileStorage {
 
 	@Override
 	public String configurarUrl(String objeto) {
-		return "localhost:8080/lancamentos/anexo/" + objeto;
+		return "http://localhost:8080/lancamentos/anexo/" + objeto;
 	}
 
 	@Override
@@ -64,6 +64,16 @@ public class LocalStorage implements FileStorage {
 		salvar(objetoNovo);
 	}
 
+//	@Override
+//	public byte[] loadFile(String fileName) {
+//		try {
+//            byte[] file = Files.readAllBytes(this.location.resolve(fileName));
+//            return file;
+//        } catch (IOException e) {
+//            throw new RuntimeException("Falha ao carregar arquivo.");
+//        }
+//	}
+	
 	@Override
 	public Resource loadFile(String fileName) {
 		try {

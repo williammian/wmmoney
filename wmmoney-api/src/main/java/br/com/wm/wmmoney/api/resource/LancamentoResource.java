@@ -74,6 +74,16 @@ public class LancamentoResource {
 		return new Anexo(nome, fileStorage.configurarUrl(nome));
 	}
 	
+//	@GetMapping("/anexo/{fileName:.+}")
+//	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO') and #oauth2.hasScope('read')")
+//    @ResponseBody
+//    public ResponseEntity<byte[]> downloadAnexo(@PathVariable String fileName) {
+//        byte[] file = fileStorage.loadFile(fileName);
+//        return ResponseEntity.ok()
+//                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"")
+//                .body(file);
+//    }
+	
 	@GetMapping("/anexo/{fileName:.+}")
 	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO') and #oauth2.hasScope('read')")
     @ResponseBody

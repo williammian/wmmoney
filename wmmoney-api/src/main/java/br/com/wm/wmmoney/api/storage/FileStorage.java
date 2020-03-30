@@ -17,6 +17,8 @@ public interface FileStorage {
 	
 	public void substituir(String objetoAntigo, String objetoNovo);
 	
+	//public byte[] loadFile(String fileName);
+	
 	public Resource loadFile(String fileName);
 	
 	default String gerarNomeUnico(String originalFilename) {
