@@ -3,8 +3,10 @@ package br.com.wm.wmmoney.api.storage;
 import java.util.UUID;
 
 import org.springframework.core.io.Resource;
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+@Component
 public interface FileStorage {
 	
 	public String salvarTemporariamente(MultipartFile arquivo);

@@ -78,8 +78,12 @@
             [style]="{ width: '25px', height: '25px' }"></p-progressSpinner>
       </div>
 
-      <div class="ui-g-12 ui-fluid" dir="rtl"
+      <div class="ui-g-12" dir="rtl"
         *ngIf="formulario.get('anexo').value">
+        <button pButton type="button" class="ui-button-danger"
+          icon="fa-close" pTooltip="Remover anexo" tooltipPosition="top"
+          (click)="removerAnexo()"></button>
+
         <a target="_blank" pTooltip="Baixar anexo" tooltipPosition="top"
           [href]="formulario.get('urlAnexo').value">{{ nomeAnexo }}</a>
       </div>
