@@ -12,6 +12,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { DropdownModule } from 'primeng/dropdown';
 import { FileUploadModule } from 'primeng/fileupload';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 
@@ -39,6 +40,7 @@ import { LancamentoCadastroReativoComponent } from './lancamento-cadastro-reativ
     DropdownModule,
     CurrencyMaskModule,
     FileUploadModule,
+    ProgressSpinnerModule,
 
     SharedModule,
     LancamentosRoutingModule
