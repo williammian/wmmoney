@@ -90,7 +90,8 @@ public class LancamentoResource {
     public ResponseEntity<Resource> downloadAnexo(@PathVariable String fileName) {
         Resource file = fileStorage.loadFile(fileName);
         return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"")
+                //.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"")
+        		.header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + file.getFilename() + "\"")
                 .body(file);
     }
 	
