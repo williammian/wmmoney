@@ -6,23 +6,37 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import br.com.wm.wmmoney.api.config.property.WmmoneyApiProperty;
+
 @Component
 public class LocalStorage implements FileStorage {
+		
+	private final WmmoneyApiProperty wmmoneyApiProperty;
 	
-	String nomeDiretorioTemp = System.getProperty("java.io.tmpdir");
+	private final String pathTemp;
+	private final String pathStorage;
 	
-	private final String pathTemp = "C:/temp/wmmoney/temp";
-	private final String path = "C:/temp/wmmoney";
+	private final Path locationTemp;
+	private final Path locationStorage;
 	
-	private final Path locationTemp = Paths.get(pathTemp);
-	private final Path location = Paths.get(path);
-
+	@Autowired
+	public LocalStorage(WmmoneyApiProperty wmmoneyApiProperty) {
+		this.wmmoneyApiProperty = wmmoneyApiProperty;
+		
+		this.pathTemp = System.getProperty("java.io.tmpdir");
+		this.pathStorage = wmmoneyApiProperty.getLocalStorage().getPath();
+		
+		this.locationTemp = Paths.get(pathTemp);
+		this.locationStorage = Paths.get(pathStorage);
+	}
+	
 	@Override
 	public String salvarTemporariamente(MultipartFile arquivo) {
 		String nomeUnico = gerarNomeUnico(arquivo.getOriginalFilename());
@@ -37,13 +51,13 @@ public class LocalStorage implements FileStorage {
 
 	@Override
 	public String configurarUrl(String objeto) {
-		return "http://localhost:8080/lancamentos/download/anexo/" + objeto;
+		return wmmoneyApiProperty.getServer() + "/lancamentos/download/anexo/" + objeto;
 	}
 
 	@Override
 	public void salvar(String objeto) {
 		try {
-			Files.move(this.locationTemp.resolve(objeto), this.location.resolve(objeto));
+			Files.move(this.locationTemp.resolve(objeto), this.locationStorage.resolve(objeto));
 		}catch (IOException e) {
 			throw new RuntimeException("Problemas ao tentar salvar o arquivo.", e);
 		}
@@ -52,7 +66,8 @@ public class LocalStorage implements FileStorage {
 	@Override
 	public void remover(String objeto) {
 		try {
-			Files.deleteIfExists(this.location.resolve(objeto));
+			Files.deleteIfExists(this.locationTemp.resolve(objeto));
+			Files.deleteIfExists(this.locationStorage.resolve(objeto));
 		}catch (IOException e) {
 			throw new RuntimeException("Problemas ao tentar remover o arquivo.", e);
 		}
@@ -79,12 +94,18 @@ public class LocalStorage implements FileStorage {
 	@Override
 	public Resource loadFile(String fileName) {
 		try {
-            Path file = location.resolve(fileName);
+            Path file = locationStorage.resolve(fileName);
             Resource resource = new UrlResource(file.toUri());
             if(resource.exists() || resource.isReadable()) {
                 return  resource;
             } else {
-                throw new RuntimeException("Falha ao carregar arquivo.");
+            	file = locationTemp.resolve(fileName);
+            	resource = new UrlResource(file.toUri());
+            	if(resource.exists() || resource.isReadable()) {
+                    return  resource;
+            	} else {
+            		throw new RuntimeException("Falha ao carregar arquivo.");
+            	}
             }
         } catch (MalformedURLException e) {
             throw new RuntimeException("Falha ao carregar arquivo.");

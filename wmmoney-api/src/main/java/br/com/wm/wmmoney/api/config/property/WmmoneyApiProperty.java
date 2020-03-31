@@ -5,12 +5,19 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties("wmmoney")
 public class WmmoneyApiProperty {
 	
-	//private String originPermitida = "http://localhost:8000";
 	private String originPermitida = "http://localhost:4200";
+	
+	private String server = "http://localhost:8080";
 	
 	private final Seguranca seguranca = new Seguranca();
 	
 	private final Mail mail = new Mail();
+	
+	private final LocalStorage localStorage = new LocalStorage();
+	
+	public LocalStorage getLocalStorage() {
+		return localStorage;
+	}
 	
 	public Mail getMail() {
 		return mail;
@@ -27,6 +34,16 @@ public class WmmoneyApiProperty {
 	public void setOriginPermitida(String originPermitida) {
 		this.originPermitida = originPermitida;
 	}
+
+	public String getServer() {
+		return server;
+	}
+
+	public void setServer(String server) {
+		this.server = server;
+	}
+
+
 
 	public static class Seguranca {
 		
@@ -85,5 +102,18 @@ public class WmmoneyApiProperty {
 		}
 	}
 	
+	public static class LocalStorage {
+		
+		private String path;
+
+		public String getPath() {
+			return path;
+		}
+
+		public void setPath(String path) {
+			this.path = path;
+		}
+		
+	}
 
 }
