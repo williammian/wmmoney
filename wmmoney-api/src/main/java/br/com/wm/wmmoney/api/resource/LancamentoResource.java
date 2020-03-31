@@ -84,8 +84,8 @@ public class LancamentoResource {
 //                .body(file);
 //    }
 	
-	@GetMapping("/anexo/{fileName:.+}")
-	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO') and #oauth2.hasScope('read')")
+	@GetMapping("/download/anexo/{fileName:.+}")
+	//@PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO') and #oauth2.hasScope('read')")
     @ResponseBody
     public ResponseEntity<Resource> downloadAnexo(@PathVariable String fileName) {
         Resource file = fileStorage.loadFile(fileName);

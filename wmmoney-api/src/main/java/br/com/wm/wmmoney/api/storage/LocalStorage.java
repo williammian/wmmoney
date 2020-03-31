@@ -35,7 +35,7 @@ public class LocalStorage implements FileStorage {
 
 	@Override
 	public String configurarUrl(String objeto) {
-		return "http://localhost:8080/lancamentos/anexo/" + objeto;
+		return "http://localhost:8080/lancamentos/download/anexo/" + objeto;
 	}
 
 	@Override

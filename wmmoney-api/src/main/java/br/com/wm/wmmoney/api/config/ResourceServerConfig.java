@@ -36,7 +36,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-				.antMatchers("/categorias").permitAll()
+				//.antMatchers("/categorias").permitAll()
+				.antMatchers("/lancamentos/download/anexo/**").permitAll()
 				.anyRequest().authenticated()
 			.and()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and() //API REST para não manter estado de nada
