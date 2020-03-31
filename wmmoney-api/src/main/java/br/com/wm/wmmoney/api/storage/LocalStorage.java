@@ -15,6 +15,8 @@ import org.springframework.web.multipart.MultipartFile;
 @Component
 public class LocalStorage implements FileStorage {
 	
+	String nomeDiretorioTemp = System.getProperty("java.io.tmpdir");
+	
 	private final String pathTemp = "C:/temp/wmmoney/temp";
 	private final String path = "C:/temp/wmmoney";
 	
