@@ -31,10 +31,10 @@
           <p-column field="nome" header="Nome"></p-column>
           <p-column styleClass="col-acoes">
             <ng-template let-cat="rowData" pTemplate="body">
-              <a pButton icon="fa-pencil"
+              <a pButton icon="fa fa-pencil"
                 pTooltip="Editar" tooltipPosition="top"
                 [routerLink]="['/categorias', cat.codigo]"></a>
-              <button pButton icon="fa-trash"
+              <button pButton icon="fa fa-trash"
                 pTooltip="Excluir" tooltipPosition="top"
                 (click)="confirmarExclusao(cat)"></button>
             </ng-template>
