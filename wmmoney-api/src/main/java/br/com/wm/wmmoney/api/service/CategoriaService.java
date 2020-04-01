@@ -1,5 +1,7 @@
 package br.com.wm.wmmoney.api.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -22,11 +24,11 @@ public class CategoriaService {
 	}
 	
 	private Categoria buscarCategoriaPeloCodigo(Long codigo) {
-		Categoria categoria = categoriaRepository.findOne(codigo);
-		if (categoria == null) {
+		Optional<Categoria> categoria = categoriaRepository.findById(codigo);
+		if (!categoria.isPresent()) {
 			throw new EmptyResultDataAccessException(1);
 		}
-		return categoria;
+		return categoria.get();
 	}
 	
 }
