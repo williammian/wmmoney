@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 
 import { LazyLoadEvent, ConfirmationService } from 'primeng/api';
-import { ToastyService } from 'ng2-toasty';
+import { MessageService } from 'primeng/components/common/messageservice';
 
 import { CategoriaFiltro, CategoriaService } from '../categoria.service';
 import { ErrorHandlerService } from 'app/core/error-handler.service';
@@ -23,7 +23,7 @@ export class CategoriasPesquisaComponent implements OnInit {
     private categoriaService: CategoriaService,
     private errorHandler: ErrorHandlerService,
     private confirmation: ConfirmationService,
-    private toasty: ToastyService,
+    private messageService: MessageService,
     private title: Title
   ) { }
 
@@ -65,7 +65,7 @@ export class CategoriasPesquisaComponent implements OnInit {
           this.grid.first = 0;
         }
 
-        this.toasty.success('Categoria excluída com sucesso!');
+        this.messageService.add({ severity: 'success', detail: 'Categoria excluída com sucesso!' });
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
