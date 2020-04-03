@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Headers, URLSearchParams } from '@angular/http';
+import { HttpParams } from '@angular/common/http';
 
 import { environment } from './../../environments/environment';
-import { AuthHttp } from 'angular2-jwt';
+
+import { MoneyHttp } from './../seguranca/money-http';
+
 import 'rxjs/add/operator/toPromise';
 
 import { Categoria } from './../core/model';
@@ -18,29 +20,30 @@ export class CategoriaService {
 
   categoriasUrl: string;
 
-  constructor(private http: AuthHttp) {
+  constructor(private http: MoneyHttp) {
     this.categoriasUrl = `${environment.apiUrl}/categorias`;
   }
 
   pesquisar(filtro: CategoriaFiltro): Promise<any> {
-    const params = new URLSearchParams();
-
-    params.set('page', filtro.pagina.toString());
-    params.set('size', filtro.itensPorPagina.toString());
+    let params = new HttpParams({
+      fromObject: {
+        page: filtro.pagina.toString(),
+        size: filtro.itensPorPagina.toString()
+      }
+    });
 
     if (filtro.nome) {
-      params.set('nome', filtro.nome);
+      params = params.append('nome', filtro.nome);
     }
 
-    return this.http.get(`${this.categoriasUrl}`, { search: params })
+    return this.http.get<any>(`${this.categoriasUrl}`, { search: params })
       .toPromise()
       .then(response => {
-        const responseJson = response.json();
-        const categorias = responseJson.content;
+        const categorias = response.content;
 
         const resultado = {
           categorias,
-          total: responseJson.totalElements
+          total: response.totalElements
         };
 
         return resultado;
@@ -49,8 +52,7 @@ export class CategoriaService {
 
   listarTodas(): Promise<any> {
     return this.http.get(`${this.categoriasUrl}/listar`)
-      .toPromise()
-      .then(response => response.json());
+      .toPromise();
   }
 
   excluir(codigo: number): Promise<void> {
@@ -60,22 +62,18 @@ export class CategoriaService {
   }
 
   adicionar(categoria: Categoria): Promise<Categoria> {
-    return this.http.post(this.categoriasUrl, JSON.stringify(categoria))
-      .toPromise()
-      .then(response => response.json());
+    return this.http.post<Categoria>(this.categoriasUrl, categoria)
+      .toPromise();
   }
 
   atualizar(categoria: Categoria): Promise<Categoria> {
-    return this.http.put(`${this.categoriasUrl}/${categoria.codigo}`,
-        JSON.stringify(categoria))
-      .toPromise()
-      .then(response => response.json() as Categoria);
+    return this.http.put<Categoria>(`${this.categoriasUrl}/${categoria.codigo}`, categoria)
+      .toPromise();
   }
 
   buscarPorCodigo(codigo: number): Promise<Categoria> {
-    return this.http.get(`${this.categoriasUrl}/${codigo}`)
-      .toPromise()
-      .then(response => response.json() as Categoria);
+    return this.http.get<Categoria>(`${this.categoriasUrl}/${codigo}`)
+      .toPromise();
   }
 
 }

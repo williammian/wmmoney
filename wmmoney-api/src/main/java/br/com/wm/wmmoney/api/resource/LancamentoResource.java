@@ -3,8 +3,10 @@ package br.com.wm.wmmoney.api.resource;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -21,6 +23,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.ResponseEntity.BodyBuilder;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -90,11 +93,37 @@ public class LancamentoResource {
     @ResponseBody
     public ResponseEntity<Resource> downloadAnexo(@PathVariable String fileName) {
         Resource file = fileStorage.loadFile(fileName);
-        return ResponseEntity.ok()
-                //.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"")
-        		.header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + file.getFilename() + "\"")
-                .body(file);
+        
+        BodyBuilder bodyBuilder = ResponseEntity.ok();
+        
+        String extensaoDoArquivo = getFileExtension(fileName);
+        
+        if(extensaoDoArquivo.equalsIgnoreCase("JPG") || extensaoDoArquivo.equalsIgnoreCase("JPEG")) {
+        	bodyBuilder.header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + file.getFilename() + "\"");
+        	bodyBuilder.header(HttpHeaders.CONTENT_TYPE, MediaType.IMAGE_JPEG_VALUE);
+        }else if(extensaoDoArquivo.equalsIgnoreCase("GIF")) {
+        	bodyBuilder.header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + file.getFilename() + "\"");
+        	bodyBuilder.header(HttpHeaders.CONTENT_TYPE, MediaType.IMAGE_GIF_VALUE);
+        }else if(extensaoDoArquivo.equalsIgnoreCase("PNG")) {
+        	bodyBuilder.header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + file.getFilename() + "\"");
+        	bodyBuilder.header(HttpHeaders.CONTENT_TYPE, MediaType.IMAGE_PNG_VALUE);
+        }else if(extensaoDoArquivo.equalsIgnoreCase("PDF")) {
+        	bodyBuilder.header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + file.getFilename() + "\"");
+        	bodyBuilder.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_PDF_VALUE);
+        }else {
+        	bodyBuilder.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"");
+        }
+        
+        return bodyBuilder.body(file);
+        
     }
+	
+	private String getFileExtension(String fileName) {
+		if(fileName.contains("."))
+			return fileName.substring(fileName.lastIndexOf(".") + 1);
+		else
+			return "";
+	}
 	
 	@GetMapping("/relatorios/por-pessoa")
 	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO') and #oauth2.hasScope('read')")

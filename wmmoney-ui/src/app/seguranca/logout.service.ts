@@ -1,7 +1,7 @@
+import { Injectable } from '@angular/core';
+import { MoneyHttp } from './money-http';
 import { environment } from './../../environments/environment';
 import { AuthService } from './auth.service';
-import { AuthHttp } from 'angular2-jwt';
-import { Injectable } from '@angular/core';
 
 @Injectable()
 export class LogoutService {
@@ -9,7 +9,7 @@ export class LogoutService {
   tokensRenokeUrl: string;
 
   constructor(
-    private http: AuthHttp,
+    private http: MoneyHttp,
     private auth: AuthService
   ) {
     this.tokensRenokeUrl = `${environment.apiUrl}/tokens/revoke`;
