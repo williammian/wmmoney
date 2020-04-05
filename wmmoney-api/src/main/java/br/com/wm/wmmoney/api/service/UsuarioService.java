@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.wm.wmmoney.api.model.Usuario;
@@ -21,6 +22,13 @@ public class UsuarioService {
 		if(codigo == null) codigo = 0L;
 		codigo++;
 		usuario.setCodigo(codigo);
+		
+		String senha = usuario.getSenha();
+		if(senha == null) senha = "123";
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		senha = encoder.encode(senha);
+		usuario.setSenha(senha);
+		
 		return usuarioRepository.save(usuario);
 	}
 
@@ -39,6 +47,17 @@ public class UsuarioService {
 //		pessoaSalva.setAtivo(ativo);
 //		pessoaRepository.save(pessoaSalva);
 //	}
+	
+	public void alterarSenha(Long codigo, String senha) {
+		Usuario usuarioSalvo = buscarUsuarioPeloCodigo(codigo);
+		
+		if(senha == null) senha = "123";
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		senha = encoder.encode(senha);
+		usuarioSalvo.setSenha(senha);
+		
+		usuarioRepository.save(usuarioSalvo);
+	}
 	
 	private Usuario buscarUsuarioPeloCodigo(Long codigo) {
 		Optional<Usuario> usuario = usuarioRepository.findById(codigo);

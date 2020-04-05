@@ -89,5 +89,12 @@ public class UsuarioResource {
 	public List<Usuario> listar() {
 		return usuarioRepository.findAll();
 	}
+	
+	@PutMapping("/{codigo}/senha")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@PreAuthorize("hasAuthority('ROLE_CADASTRAR_USUARIO') and #oauth2.hasScope('write')")
+	public void alterarSenha(@PathVariable Long codigo, @RequestBody String senha) {
+		usuarioService.alterarSenha(codigo, senha);
+	}
 
 }
