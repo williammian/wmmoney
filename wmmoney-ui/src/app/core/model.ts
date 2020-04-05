@@ -51,3 +51,16 @@ export class Lancamento {
   anexo: string;
   urlAnexo: string;
 }
+
+export class Permissao {
+  codigo: number;
+  descricao: string;
+}
+
+export class Usuario {
+  codigo: number;
+  nome: string;
+  email: string;
+  senha: string;
+  permissoes = new Array<Permissao>();
+}
