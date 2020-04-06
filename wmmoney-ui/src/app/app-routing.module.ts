@@ -10,6 +10,7 @@ const routes: Routes = [
   { path: 'categorias', loadChildren: 'app/categorias/categorias.module#CategoriasModule' },
   { path: 'dashboard', loadChildren: 'app/dashboard/dashboard.module#DashboardModule' },
   { path: 'relatorios', loadChildren: 'app/relatorios/relatorios.module#RelatoriosModule'},
+  { path: 'usuarios', loadChildren: 'app/usuarios/usuarios.module#UsuariosModule' },
 
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: 'nao-autorizado', component: NaoAutorizadoComponent },
