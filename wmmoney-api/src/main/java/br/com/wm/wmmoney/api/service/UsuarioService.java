@@ -34,16 +34,7 @@ public class UsuarioService {
 
 	public Usuario atualizar(Long codigo, Usuario usuario) {
 		Usuario usuarioSalvo = buscarUsuarioPeloCodigo(codigo);
-		
-		String senha = usuario.getSenha();
-		if(senha == null) {
-			senha = usuarioSalvo.getSenha();
-		}else {
-			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-			senha = encoder.encode(senha);
-		}
-		usuarioSalvo.setSenha(senha);
-		
+				
 		usuarioSalvo.getPermissoes().clear();
 		usuarioSalvo.getPermissoes().addAll(usuario.getPermissoes());
 		

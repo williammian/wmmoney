@@ -187,7 +187,12 @@ public class LancamentoResource {
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@PreAuthorize("hasAuthority('ROLE_REMOVER_LANCAMENTO') and #oauth2.hasScope('write')")
 	public void remover(@PathVariable Long codigo) {
-		lancamentoRepository.deleteById(codigo);
+		Optional<Lancamento> lancamento = lancamentoRepository.findById(codigo);
+		
+		Lancamento lanc = lancamento.get();
+		if(lanc.getAnexo() != null) fileStorage.remover(lanc.getAnexo());
+		
+		lancamentoRepository.delete(lanc);
 	}
 	
 	@PutMapping("/{codigo}")

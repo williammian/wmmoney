@@ -31,6 +31,7 @@
           <tr>
             <th>Nome</th>
             <th>E-mail</th>
+            <th>Alterar Senha</th>
             <th class="col-acoes-header"></th>
           </tr>
         </ng-template>
@@ -39,6 +40,9 @@
           <tr>
             <td>{{ usuario.nome }}</td>
             <td>{{ usuario.email }}</td>
+            <td style="text-align: center;">
+              <a [routerLink]="['/usuarios/senha', usuario.codigo]">Alterar Senha</a>
+            </td>
             <td class="col-acoes">
               <a pButton icon="fa fa-pencil"
                 pTooltip="Editar" tooltipPosition="top"
@@ -53,7 +57,7 @@
 
         <ng-template pTemplate="emptymessage">
           <tr>
-            <td colspan="3">
+            <td colspan="4">
               Nenhum usuário encontrado
             </td>
           </tr>

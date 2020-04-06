@@ -86,4 +86,13 @@ export class UsuarioService {
       .toPromise();
   }
 
+  alterarSenha(codigo: number, senha: string): Promise<void> {
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json');
+
+    return this.http.put(`${this.usuariosUrl}/${codigo}/senha`, senha, { headers })
+      .toPromise()
+      .then(() => null);
+  }
+
 }

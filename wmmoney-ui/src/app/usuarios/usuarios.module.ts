@@ -14,6 +14,8 @@ import { DialogModule } from 'primeng/dialog';
 import { UsuariosPesquisaComponent } from './usuarios-pesquisa/usuarios-pesquisa.component';
 import { UsuariosRoutingModule } from './usuarios-routing.module';
 import { SharedModule } from 'app/shared/shared.module';
+import { UsuarioCadastroComponent } from './usuario-cadastro/usuario-cadastro.component';
+import { UsuarioAlterarSenhaComponent } from './usuario-alterar-senha/usuario-alterar-senha.component';
 
 @NgModule({
   imports: [
@@ -32,6 +34,6 @@ import { SharedModule } from 'app/shared/shared.module';
     SharedModule,
     UsuariosRoutingModule
   ],
-  declarations: [UsuariosPesquisaComponent]
+  declarations: [UsuariosPesquisaComponent, UsuarioCadastroComponent, UsuarioAlterarSenhaComponent]
 })
 export class UsuariosModule { }
