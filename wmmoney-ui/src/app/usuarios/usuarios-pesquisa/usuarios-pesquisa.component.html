@@ -1,3 +1,69 @@
-<p>
-  usuarios-pesquisa works!
-</p>
+<div class="container">
+  <div class="ui-g">
+
+    <form autocomplete="off" (ngSubmit)="pesquisar()">
+
+      <div class="ui-g-12">
+        <h1>Usuários</h1>
+      </div>
+
+      <div class="ui-g-12 ui-fluid">
+        <label>Nome</label>
+        <input pInputText type="text" name="nome" [(ngModel)]="filtro.nome">
+      </div>
+
+      <div class="ui-g-12">
+        <button pButton type="submit" label="Pesquisar"></button>
+      </div>
+
+    </form>
+
+  </div>
+
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <p-table [value]="usuarios" [responsive]="true"
+        [paginator]="true" [rows]="filtro.itensPorPagina"
+        [lazy]="true" [totalRecords]="totalRegistros"
+        (onLazyLoad)="aoMudarPagina($event)"
+        #tabela>
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Nome</th>
+            <th>E-mail</th>
+            <th class="col-acoes-header"></th>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-usuario>
+          <tr>
+            <td>{{ usuario.nome }}</td>
+            <td>{{ usuario.email }}</td>
+            <td class="col-acoes">
+              <a pButton icon="fa fa-pencil"
+                pTooltip="Editar" tooltipPosition="top"
+                [routerLink]="['/usuarios', usuario.codigo]"></a>
+
+              <button pButton icon="fa fa-trash"
+                pTooltip="Excluir" tooltipPosition="top"
+                (click)="confirmarExclusao(usuario)"></button>
+            </td>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="3">
+              Nenhum usuário encontrado
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+
+    <div class="ui-g-12">
+      <a pButton label="Novo Usuário" routerLink="/usuarios/novo"></a>
+    </div>
+  </div>
+
+</div>

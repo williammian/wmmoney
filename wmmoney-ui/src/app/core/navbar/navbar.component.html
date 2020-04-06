@@ -19,6 +19,8 @@
     <li class="navbar-menuitem" routerLinkActive="ativo"
       *ngIf="auth.temPermissao('ROLE_PESQUISAR_CATEGORIA')"><a routerLink="/categorias">Categorias</a></li>
     <li class="navbar-menuitem" routerLinkActive="ativo"
+      *ngIf="auth.temPermissao('ROLE_PESQUISAR_USUARIO')"><a routerLink="/usuarios">Usuários</a></li>
+    <li class="navbar-menuitem" routerLinkActive="ativo"
       *ngIf="auth.temPermissao('ROLE_PESQUISAR_LANCAMENTO')"><a routerLink="/relatorios/lancamentos">Relatório</a></li>
     <li class="navbar-menuitem"><a href="javascript:;" (click)="logout()">Logout</a></li>
   </ul>
