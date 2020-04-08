@@ -4,8 +4,9 @@ import { Title } from '@angular/platform-browser';
 import { FormControl } from '@angular/forms';
 
 import { MessageService } from 'primeng/components/common/messageservice';
+import { SelectItem } from 'primeng/api';
 
-import { Usuario } from './../../core/model';
+import { Usuario, Permissao } from './../../core/model';
 import { UsuarioService } from './../usuario.service';
 import { ErrorHandlerService } from 'app/core/error-handler.service';
 
@@ -18,6 +19,10 @@ export class UsuarioCadastroComponent implements OnInit {
 
   usuario = new Usuario();
 
+  permissoes: SelectItem[];
+
+  selectedPermissoes: Permissao[];
+
   constructor(
     private usuarioService: UsuarioService,
     private messageService: MessageService,
@@ -25,7 +30,13 @@ export class UsuarioCadastroComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private title: Title
-  ) { }
+  ) {
+    this.permissoes = [
+      { label: 'Cadastrar Lançamento', value: {codigo: 6} },
+      { label: 'Remover Lançamento', value: {codigo: 7} },
+      { label: 'Pesquisar Lançamento', value: {codigo: 8} }
+    ];
+  }
 
   ngOnInit() {
     const codigoUsuario = this.route.snapshot.params['codigo'];

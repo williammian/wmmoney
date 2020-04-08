@@ -39,6 +39,14 @@
           text="Informe a senha"></app-message>
       </div>
 
+      <div class="ui-g-12 ui-fluid">
+        <p-panel header="Permissões">
+          <p-listbox [ngModelOptions]="{standalone: true}" [options]="permissoes" [(ngModel)]="selectedPermissoes" multiple="multiple" checkbox="checkbox" filter="filter"></p-listbox>
+        </p-panel>
+      </div>
+
+      Selected Permissões: <span *ngFor="let permissao of selectedPermissoes" style="margin-right:10px">{{permissao.codigo}}</span>
+
       <div class="ui-g-12">
         <button pButton type="submit" label="Salvar" [disabled]="f.invalid"></button>
         <button pButton type="button" label="Novo" class="ui-button-info"

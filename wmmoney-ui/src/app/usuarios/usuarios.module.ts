@@ -10,6 +10,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { TooltipModule } from 'primeng/tooltip';
 import { PanelModule } from 'primeng/panel';
 import { DialogModule } from 'primeng/dialog';
+import { ListboxModule } from 'primeng/listbox';
 
 import { UsuariosPesquisaComponent } from './usuarios-pesquisa/usuarios-pesquisa.component';
 import { UsuariosRoutingModule } from './usuarios-routing.module';
@@ -30,6 +31,7 @@ import { UsuarioAlterarSenhaComponent } from './usuario-alterar-senha/usuario-al
     InputMaskModule,
     PanelModule,
     DialogModule,
+    ListboxModule,
 
     SharedModule,
     UsuariosRoutingModule
