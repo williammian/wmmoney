@@ -21,7 +21,7 @@ export class UsuarioCadastroComponent implements OnInit {
 
   permissoes: SelectItem[];
 
-  selectedPermissoes: Permissao[];
+  selectedPermissoes: number[];
 
   constructor(
     private usuarioService: UsuarioService,
@@ -32,9 +32,17 @@ export class UsuarioCadastroComponent implements OnInit {
     private title: Title
   ) {
     this.permissoes = [
-      { label: 'Cadastrar Lançamento', value: {codigo: 6} },
-      { label: 'Remover Lançamento', value: {codigo: 7} },
-      { label: 'Pesquisar Lançamento', value: {codigo: 8} }
+      { label: 'Cadastrar Lançamento', value: 6 },
+      { label: 'Remover Lançamento', value: 7 },
+      { label: 'Pesquisar Lançamento', value: 8 },
+
+      { label: 'Cadastrar Pessoa', value: 3 },
+      { label: 'Remover Pessoa', value: 4 },
+      { label: 'Pesquisar Pessoa', value: 5 },
+
+      { label: 'Cadastrar Categoria', value: 1 },
+      { label: 'Remover Categoria', value: 2 },
+      { label: 'Pesquisar Categoria', value: 9 }
     ];
   }
 
@@ -52,11 +60,20 @@ export class UsuarioCadastroComponent implements OnInit {
     return Boolean(this.usuario.codigo)
   }
 
+  carregarPermissoesSelecionadas() {
+    let permissoesSelecionadas = new Array();
+    for(let permissao of this.usuario.permissoes) {
+      permissoesSelecionadas.push(permissao.codigo);
+    }
+    this.selectedPermissoes = permissoesSelecionadas;
+  }
+
   carregarUsuario(codigo: number) {
     this.usuarioService.buscarPorCodigo(codigo)
       .then(usuario => {
         this.usuario = usuario;
         this.atualizarTituloEdicao();
+        this.carregarPermissoesSelecionadas();
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
