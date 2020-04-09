@@ -71,12 +71,12 @@ public class UsuarioResource {
 		return ResponseEntity.ok(usuarioSalvo);
 	}
 	
-//	@PutMapping("/{codigo}/ativo")
-//	@ResponseStatus(HttpStatus.NO_CONTENT)
-//	@PreAuthorize("hasAuthority('ROLE_CADASTRAR_PESSOA') and #oauth2.hasScope('write')")
-//	public void atualizarPropriedadeAtivo(@PathVariable Long codigo, @RequestBody Boolean ativo) {
-//		pessoaService.atualizarPropriedadeAtivo(codigo, ativo);
-//	}
+	@PutMapping("/{codigo}/ativo")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@PreAuthorize("hasAuthority('ROLE_CADASTRAR_USUARIO') and #oauth2.hasScope('write')")
+	public void atualizarPropriedadeAtivo(@PathVariable Long codigo, @RequestBody Boolean ativo) {
+		usuarioService.atualizarPropriedadeAtivo(codigo, ativo);
+	}
 	
 	@GetMapping
 	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_USUARIO') and #oauth2.hasScope('read')")

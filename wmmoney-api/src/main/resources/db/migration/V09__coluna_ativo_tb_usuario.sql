@@ -1,0 +1,5 @@
+ALTER TABLE usuario ADD COLUMN ativo BOOLEAN;
+
+UPDATE usuario SET ativo = true;
+
+ALTER TABLE usuario MODIFY COLUMN ativo BOOLEAN NOT NULL;

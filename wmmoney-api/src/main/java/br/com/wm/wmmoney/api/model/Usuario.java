@@ -27,6 +27,9 @@ public class Usuario {
 	private String email;
 	
 	@NotNull
+	private Boolean ativo;
+	
+	@NotNull
 	private String senha;
 
 	@ManyToMany(fetch = FetchType.EAGER)
@@ -56,6 +59,14 @@ public class Usuario {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 
 	public String getSenha() {

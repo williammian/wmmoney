@@ -42,11 +42,11 @@ public class UsuarioService {
 		return usuarioRepository.save(usuarioSalvo);
 	}
 	
-//	public void atualizarPropriedadeAtivo(Long codigo, Boolean ativo) {
-//		Pessoa pessoaSalva = buscarPessoaPeloCodigo(codigo);
-//		pessoaSalva.setAtivo(ativo);
-//		pessoaRepository.save(pessoaSalva);
-//	}
+	public void atualizarPropriedadeAtivo(Long codigo, Boolean ativo) {
+		Usuario usuarioSalvo = buscarUsuarioPeloCodigo(codigo);
+		usuarioSalvo.setAtivo(ativo);
+		usuarioRepository.save(usuarioSalvo);
+	}
 	
 	public void alterarSenha(Long codigo, String senha) {
 		Usuario usuarioSalvo = buscarUsuarioPeloCodigo(codigo);
