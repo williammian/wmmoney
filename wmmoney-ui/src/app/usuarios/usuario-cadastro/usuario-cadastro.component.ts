@@ -79,10 +79,19 @@ export class UsuarioCadastroComponent implements OnInit {
   }
 
   salvar(form: FormControl) {
+    this.comporPermissoesSelecionadasUsuario();
+
     if (this.editando) {
       this.atualizarUsuario(form);
     } else {
       this.adicionarUsuario(form);
+    }
+  }
+
+  comporPermissoesSelecionadasUsuario() {
+    this.usuario.permissoes = new Array();
+    for(let codigo of this.selectedPermissoes) {
+      this.usuario.permissoes.push({ codigo: codigo, descricao: ''});
     }
   }
 
