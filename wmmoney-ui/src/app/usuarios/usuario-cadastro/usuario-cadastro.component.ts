@@ -23,6 +23,11 @@ export class UsuarioCadastroComponent implements OnInit {
 
   selectedPermissoes: number[];
 
+  status = [
+    { label: 'Ativo', value: true },
+    { label: 'Inativo', value: false },
+  ];
+
   constructor(
     private usuarioService: UsuarioService,
     private messageService: MessageService,

@@ -31,6 +31,7 @@
           <tr>
             <th>Nome</th>
             <th>E-mail</th>
+            <th>Status</th>
             <th>Alterar Senha</th>
             <th class="col-acoes-header"></th>
           </tr>
@@ -40,6 +41,14 @@
           <tr>
             <td>{{ usuario.nome }}</td>
             <td>{{ usuario.email }}</td>
+            <td style="text-align: center;">
+              <a href="javascript:;"
+                [pTooltip]="usuario.ativo ? 'Desativar' : 'Ativar'"
+                tooltipPosition="top"
+                (click)="alternarStatus(usuario)">
+                {{ usuario.ativo ? 'Ativo' : 'Inativo' }}
+              </a>
+            </td>
             <td style="text-align: center;">
               <a [routerLink]="['/usuarios/senha', usuario.codigo]">Alterar Senha</a>
             </td>
@@ -57,7 +66,7 @@
 
         <ng-template pTemplate="emptymessage">
           <tr>
-            <td colspan="4">
+            <td colspan="5">
               Nenhum usuário encontrado
             </td>
           </tr>

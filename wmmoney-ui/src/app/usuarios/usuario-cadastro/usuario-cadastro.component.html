@@ -29,7 +29,7 @@
         <app-message [control]="email" error="email" text="Informe um e-mail válido"></app-message>
       </div>
 
-      <div class="ui-g-12 ui-fluid"
+      <div class="ui-g-12 ui-md-6 ui-fluid"
         *ngIf="!usuario.codigo">
         <label>Senha</label>
         <input pInputText type="text" name="senha"
@@ -39,7 +39,13 @@
           text="Informe a senha"></app-message>
       </div>
 
-      <div class="ui-g-12 ui-fluid">
+      <div class="ui-g-12 ui-md-6 ui-fluid">
+        <label>Status</label>
+        <p-selectButton name="ativo" [options]="status"
+        [(ngModel)]="usuario.ativo"></p-selectButton>
+      </div>
+
+      <div class="ui-g-12 ui-md-6 ui-fluid">
         <p-panel header="Permissões">
           <p-listbox [ngModelOptions]="{standalone: true}" [options]="permissoes" [(ngModel)]="selectedPermissoes" multiple="multiple" checkbox="checkbox" filter="filter"></p-listbox>
         </p-panel>

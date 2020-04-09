@@ -11,6 +11,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { PanelModule } from 'primeng/panel';
 import { DialogModule } from 'primeng/dialog';
 import { ListboxModule } from 'primeng/listbox';
+import { SelectButtonModule } from 'primeng/selectbutton';
 
 import { UsuariosPesquisaComponent } from './usuarios-pesquisa/usuarios-pesquisa.component';
 import { UsuariosRoutingModule } from './usuarios-routing.module';
@@ -32,6 +33,7 @@ import { UsuarioAlterarSenhaComponent } from './usuario-alterar-senha/usuario-al
     PanelModule,
     DialogModule,
     ListboxModule,
+    SelectButtonModule,
 
     SharedModule,
     UsuariosRoutingModule

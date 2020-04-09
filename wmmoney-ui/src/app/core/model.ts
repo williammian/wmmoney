@@ -62,5 +62,6 @@ export class Usuario {
   nome: string;
   email: string;
   senha: string;
+  ativo = true;
   permissoes = new Array<Permissao>();
 }
