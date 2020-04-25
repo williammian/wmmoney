@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 
 import { InputMaskModule } from 'primeng/inputmask';
 import { DataTableModule } from 'primeng/datatable';
+import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { TooltipModule } from 'primeng/tooltip';
@@ -22,6 +23,7 @@ import { CategoriasRoutingModule } from './categorias-routing.module';
     InputTextModule,
     ButtonModule,
     DataTableModule,
+    TableModule,
     TooltipModule,
     InputMaskModule,
 

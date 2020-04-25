@@ -36,7 +36,7 @@ export class CategoriaService {
       params = params.append('nome', filtro.nome);
     }
 
-    return this.http.get<any>(`${this.categoriasUrl}`, { search: params })
+    return this.http.get<any>(`${this.categoriasUrl}`, { params })
       .toPromise()
       .then(response => {
         const categorias = response.content;
