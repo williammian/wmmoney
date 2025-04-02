@@ -70,6 +70,10 @@ O repositório está dividido em dois principais diretórios:
 3. Execute a aplicação Angular:
 
    ng serve
+   
+4. Acesse a aplicação no navegador:
+
+   http://localhost:4200
 
 ### Licença
 
